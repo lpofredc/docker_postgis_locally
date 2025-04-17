@@ -1,0 +1,42 @@
+services:
+   
+  pg17:
+    image: postgis/postgis:17-3.4
+    container_name: pg17
+    restart: always
+    volumes:
+      - ./data/postgresql/17:/var/lib/postgresql/data
+      - /var/run/postgresql:/var/run/postgresql
+      - /run/postgresql:/run/postgresql
+    ports:
+      - 127.0.0.1:5433:5433
+    environment:
+      - POSTGRES_PASSWORD
+      - TZ
+
+
+  pg16:
+    image: postgis/postgis:16-3.4
+    container_name: pg16
+    restart: always
+    volumes:
+      - ./data/postgresql/16:/var/lib/postgresql/data
+      - /var/run/postgresql:/var/run/postgresql
+      - /run/postgresql:/run/postgresql
+    ports:
+      - 127.0.0.1:5432:5432
+    environment:
+      - POSTGRES_PASSWORD
+      - TZ
+
+  pgadmin4:
+    image: dpage/pgadmin4:latest
+    container_name: pgadmin
+    restart: always
+    volumes:
+      - ./data/pgadmin:/var/lib/pgadmin
+    ports:
+      - 5050:80
+    environment:
+      - PGADMIN_DEFAULT_EMAIL
+      - PGADMIN_DEFAULT_PASSWORD
